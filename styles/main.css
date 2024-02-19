@@ -47,6 +47,7 @@ button {
   height: 700px;
   width: 700px;
   border: 1px solid grey;
+  background-color: pink;
 }
 
 .game-grid div {
@@ -54,6 +55,13 @@ button {
   flex-grow: 1;
   height: 10%;
   width: 10%;
+}
+
+.game-grid div.player {
+  background-image: url("../assets/froggy.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
 
 .current-game-info {
