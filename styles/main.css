@@ -64,6 +64,10 @@ button {
   background-position: center;
 }
 
+.game-grid div.obstacle {
+  background-color: red;
+}
+
 .current-game-info {
   gap: 450px;
   font-size: 24px;

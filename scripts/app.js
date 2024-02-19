@@ -28,6 +28,7 @@ function removePlayer(location) {
 
 document.addEventListener("keydown", relocatePlayer);
 
+// 37 is left, 38 is up, 39 is right, 40 is down
 function relocatePlayer(event) {
   removePlayer(playerLocation);
   if (event.keyCode === 37 && playerLocation % width !== 0) {
@@ -41,4 +42,17 @@ function relocatePlayer(event) {
   }
 
   addPlayer(playerLocation);
+  detectCollision();
+}
+
+function addObstacle() {
+  gridCells[89].classList.add("obstacle");
+}
+
+addObstacle();
+
+function detectCollision() {
+  if (gridCells[playerLocation].classList.contains("obstacle")) {
+    console.log("Oh no!");
+  }
 }
