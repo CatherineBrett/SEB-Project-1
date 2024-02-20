@@ -57,15 +57,25 @@ button {
   width: 10%;
 }
 
-.game-grid div.player {
+.player {
   background-image: url("../assets/froggy.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
 
-.game-grid div.obstacle {
-  background-color: red;
+.purple-car {
+  background-image: url("../assets/purple-car.webp");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.green-car {
+  background-image: url("../assets/green-car.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
 
 .current-game-info {

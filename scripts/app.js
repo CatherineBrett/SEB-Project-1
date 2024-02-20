@@ -3,7 +3,17 @@ const width = 10;
 const height = 10;
 const numberOfCells = width * height;
 const gridCells = [];
-let playerLocation = 94;
+let playerLocation = 90;
+let obstacleOneLocation = 89;
+let obstacleTwoLocation = 70;
+let obstacleThreeLocation = 69;
+let obstacleFourLocation = 30;
+let obstacleFiveLocation = 29;
+let obstacleSixLocation = 10;
+let obstacleOneTimer = null;
+let obstacleTwoTimer = null;
+const startButton = document.getElementById("start");
+let obstacleSpeed = 500;
 
 function addPlayer(location) {
   gridCells[location].classList.add("player");
@@ -26,8 +36,6 @@ function removePlayer(location) {
   gridCells[location].classList.remove("player");
 }
 
-document.addEventListener("keydown", relocatePlayer);
-
 // 37 is left, 38 is up, 39 is right, 40 is down
 function relocatePlayer(event) {
   removePlayer(playerLocation);
@@ -42,17 +50,55 @@ function relocatePlayer(event) {
   }
 
   addPlayer(playerLocation);
-  detectCollision();
 }
 
-function addObstacle() {
-  gridCells[89].classList.add("obstacle");
-}
-
-addObstacle();
-
-function detectCollision() {
-  if (gridCells[playerLocation].classList.contains("obstacle")) {
-    console.log("Oh no!");
+function detectOb1Collision() {
+  if (gridCells[obstacleOneLocation].classList.contains("player")) {
+    console.log("Oh no, you've hit obstacle 1!");
+    clearInterval(obstacleOneTimer);
   }
 }
+
+function detectOb2Collision() {
+  if (gridCells[obstacleTwoLocation].classList.contains("player")) {
+    console.log("Oh no, you've hit obstacle 2!");
+    clearInterval(obstacleTwoTimer);
+  }
+}
+
+function moveObstacleOneLeft() {
+  obstacleOneTimer = setInterval(() => {
+    gridCells[obstacleOneLocation].classList.add("purple-car");
+    detectOb1Collision();
+    if (obstacleOneLocation === 80) {
+      clearInterval(obstacleOneTimer);
+    } else {
+      gridCells[obstacleOneLocation].classList.remove("purple-car");
+      obstacleOneLocation--;
+      gridCells[obstacleOneLocation].classList.add("purple-car");
+    }
+  }, obstacleSpeed);
+}
+
+moveObstacleOneLeft();
+
+function moveObstacleTwoRight() {
+  obstacleTwoTimer = setInterval(() => {
+    gridCells[obstacleTwoLocation].classList.add("green-car");
+    detectOb2Collision();
+    if (obstacleTwoLocation === 79) {
+      clearInterval(obstacleTwoTimer);
+    } else {
+      gridCells[obstacleTwoLocation].classList.remove("green-car");
+      obstacleTwoLocation++;
+      gridCells[obstacleTwoLocation].classList.add("green-car");
+    }
+  }, obstacleSpeed);
+}
+
+moveObstacleTwoRight();
+
+function startGame() {}
+
+startButton.addEventListener("click", startGame);
+document.addEventListener("keydown", relocatePlayer);
