@@ -14,6 +14,10 @@ let obstacleOneTimer = null;
 let obstacleTwoTimer = null;
 const startButton = document.getElementById("start");
 let obstacleSpeed = 500;
+let lives = 3;
+const livesTracker = document.getElementById("lives-tracker");
+let score = 0;
+const scoreBoard = document.getElementById("scoreboard");
 
 function addPlayer(location) {
   gridCells[location].classList.add("player");
@@ -41,12 +45,14 @@ function relocatePlayer(event) {
   removePlayer(playerLocation);
   if (event.keyCode === 37 && playerLocation % width !== 0) {
     playerLocation -= 1;
-  } else if (event.keyCode === 38 && playerLocation >= width) {
-    playerLocation -= width;
+  } else if (event.keyCode === 38 && playerLocation >= height) {
+    playerLocation -= height;
+    score += 10;
+    scoreBoard.textContent = score;
   } else if (event.keyCode === 39 && playerLocation % width !== width - 1) {
     playerLocation += 1;
   } else if (event.keyCode === 40 && playerLocation < 90) {
-    playerLocation += width;
+    playerLocation += height;
   }
 
   addPlayer(playerLocation);
