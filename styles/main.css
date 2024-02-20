@@ -44,8 +44,8 @@ button {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  height: 700px;
-  width: 700px;
+  height: 500px;
+  width: 500px;
   border: 1px solid grey;
   background-color: pink;
 }
