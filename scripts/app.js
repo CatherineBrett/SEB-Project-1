@@ -62,6 +62,10 @@ function detectOb1Collision() {
   if (gridCells[obstacleOneLocation].classList.contains("player")) {
     console.log("Oh no, you've hit obstacle 1!");
     clearInterval(obstacleOneTimer);
+    score -= 10;
+    scoreBoard.textContent = score;
+    lives--;
+    livesTracker.innerText = lives ? "🐸".repeat(lives) : "😭";
   }
 }
 
@@ -69,6 +73,10 @@ function detectOb2Collision() {
   if (gridCells[obstacleTwoLocation].classList.contains("player")) {
     console.log("Oh no, you've hit obstacle 2!");
     clearInterval(obstacleTwoTimer);
+    score -= 10;
+    scoreBoard.textContent = score;
+    lives--;
+    livesTracker.innerText = lives ? "🐸".repeat(lives) : "😭";
   }
 }
 
