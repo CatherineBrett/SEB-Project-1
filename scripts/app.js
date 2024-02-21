@@ -3,17 +3,21 @@ const width = 10;
 const height = 10;
 const numberOfCells = width * height;
 const gridCells = [];
-let playerLocation = 90;
-let obstacleOneLocation = 89;
-let obstacleTwoLocation = 70;
-let obstacleThreeLocation = 69;
-let obstacleFourLocation = 30;
-let obstacleFiveLocation = 29;
-let obstacleSixLocation = 10;
-let obstacleOneTimer = null;
-let obstacleTwoTimer = null;
+let playerLocation = 94;
+let obstacle1Location = 89;
+let obstacle2Location = 71;
+let obstacle3Location = 67;
+let obstacle4Location = 33;
+let obstacle5Location = 25;
+let obstacle6Location = 15;
+let obstacle1Timer = null;
+let obstacle2Timer = null;
+let obstacle3Timer = null;
+let obstacle4Timer = null;
+let obstacle5Timer = null;
+let obstacle6Timer = null;
 const startButton = document.getElementById("start");
-let obstacleSpeed = 500;
+let obstacleSpeed = 1000;
 let lives = 3;
 const livesTracker = document.getElementById("lives-tracker");
 let score = 0;
@@ -59,9 +63,9 @@ function relocatePlayer(event) {
 }
 
 function detectOb1Collision() {
-  if (gridCells[obstacleOneLocation].classList.contains("player")) {
+  if (gridCells[obstacle1Location].classList.contains("player")) {
     console.log("Oh no, you've hit obstacle 1!");
-    clearInterval(obstacleOneTimer);
+    clearInterval(obstacle1Timer);
     score -= 10;
     scoreBoard.textContent = score;
     lives--;
@@ -70,9 +74,9 @@ function detectOb1Collision() {
 }
 
 function detectOb2Collision() {
-  if (gridCells[obstacleTwoLocation].classList.contains("player")) {
+  if (gridCells[obstacle2Location].classList.contains("player")) {
     console.log("Oh no, you've hit obstacle 2!");
-    clearInterval(obstacleTwoTimer);
+    clearInterval(obstacle2Timer);
     score -= 10;
     scoreBoard.textContent = score;
     lives--;
@@ -80,37 +84,144 @@ function detectOb2Collision() {
   }
 }
 
-function moveObstacleOneLeft() {
-  obstacleOneTimer = setInterval(() => {
-    gridCells[obstacleOneLocation].classList.add("purple-car");
+function detectOb3Collision() {
+  if (gridCells[obstacle3Location].classList.contains("player")) {
+    console.log("Oh no, you've hit obstacle 3!");
+    clearInterval(obstacle3Timer);
+    score -= 10;
+    scoreBoard.textContent = score;
+    lives--;
+    livesTracker.innerText = lives ? "🐸".repeat(lives) : "😭";
+  }
+}
+
+function detectOb4Collision() {
+  if (gridCells[obstacle4Location].classList.contains("player")) {
+    console.log("Oh no, you've hit obstacle 4!");
+    clearInterval(obstacle4Timer);
+    score -= 10;
+    scoreBoard.textContent = score;
+    lives--;
+    livesTracker.innerText = lives ? "🐸".repeat(lives) : "😭";
+  }
+}
+
+function detectOb5Collision() {
+  if (gridCells[obstacle5Location].classList.contains("player")) {
+    console.log("Oh no, you've hit obstacle 5!");
+    clearInterval(obstacle5Timer);
+    score -= 10;
+    scoreBoard.textContent = score;
+    lives--;
+    livesTracker.innerText = lives ? "🐸".repeat(lives) : "😭";
+  }
+}
+function detectOb6Collision() {
+  if (gridCells[obstacle6Location].classList.contains("player")) {
+    console.log("Oh no, you've hit obstacle 6!");
+    clearInterval(obstacle6Timer);
+    score -= 10;
+    scoreBoard.textContent = score;
+    lives--;
+    livesTracker.innerText = lives ? "🐸".repeat(lives) : "😭";
+  }
+}
+
+function moveObstacle1Left() {
+  obstacle1Timer = setInterval(() => {
+    gridCells[obstacle1Location].classList.add("purple-car");
     detectOb1Collision();
-    if (obstacleOneLocation === 80) {
-      clearInterval(obstacleOneTimer);
+    if (obstacle1Location === 80) {
+      clearInterval(obstacle1Timer);
     } else {
-      gridCells[obstacleOneLocation].classList.remove("purple-car");
-      obstacleOneLocation--;
-      gridCells[obstacleOneLocation].classList.add("purple-car");
+      gridCells[obstacle1Location].classList.remove("purple-car");
+      obstacle1Location--;
+      gridCells[obstacle1Location].classList.add("purple-car");
     }
   }, obstacleSpeed);
 }
 
-moveObstacleOneLeft();
+moveObstacle1Left();
 
-function moveObstacleTwoRight() {
-  obstacleTwoTimer = setInterval(() => {
-    gridCells[obstacleTwoLocation].classList.add("green-car");
+function moveObstacle2Right() {
+  obstacle2Timer = setInterval(() => {
+    gridCells[obstacle2Location].classList.add("green-car");
     detectOb2Collision();
-    if (obstacleTwoLocation === 79) {
-      clearInterval(obstacleTwoTimer);
+    if (obstacle2Location === 79) {
+      clearInterval(obstacle2Timer);
     } else {
-      gridCells[obstacleTwoLocation].classList.remove("green-car");
-      obstacleTwoLocation++;
-      gridCells[obstacleTwoLocation].classList.add("green-car");
+      gridCells[obstacle2Location].classList.remove("green-car");
+      obstacle2Location++;
+      gridCells[obstacle2Location].classList.add("green-car");
     }
   }, obstacleSpeed);
 }
 
-moveObstacleTwoRight();
+moveObstacle2Right();
+
+function moveObstacle3Left() {
+  obstacle3Timer = setInterval(() => {
+    gridCells[obstacle3Location].classList.add("minibus");
+    detectOb3Collision();
+    if (obstacle3Location === 60) {
+      clearInterval(obstacle3Timer);
+    } else {
+      gridCells[obstacle3Location].classList.remove("minibus");
+      obstacle3Location--;
+      gridCells[obstacle3Location].classList.add("minibus");
+    }
+  }, obstacleSpeed);
+}
+
+moveObstacle3Left();
+
+function moveObstacle4Right() {
+  obstacle4Timer = setInterval(() => {
+    gridCells[obstacle4Location].classList.add("bus");
+    detectOb4Collision();
+    if (obstacle4Location === 39) {
+      clearInterval(obstacle4Timer);
+    } else {
+      gridCells[obstacle4Location].classList.remove("bus");
+      obstacle4Location++;
+      gridCells[obstacle4Location].classList.add("bus");
+    }
+  }, obstacleSpeed);
+}
+
+moveObstacle4Right();
+
+function moveObstacle5Left() {
+  obstacle5Timer = setInterval(() => {
+    gridCells[obstacle5Location].classList.add("truck");
+    detectOb5Collision();
+    if (obstacle5Location === 20) {
+      clearInterval(obstacle5Timer);
+    } else {
+      gridCells[obstacle5Location].classList.remove("truck");
+      obstacle5Location--;
+      gridCells[obstacle5Location].classList.add("truck");
+    }
+  }, obstacleSpeed);
+}
+
+moveObstacle5Left();
+
+function moveObstacle6Right() {
+  obstacle6Timer = setInterval(() => {
+    gridCells[obstacle6Location].classList.add("tank");
+    detectOb6Collision();
+    if (obstacle6Location === 19) {
+      clearInterval(obstacle6Timer);
+    } else {
+      gridCells[obstacle6Location].classList.remove("tank");
+      obstacle6Location++;
+      gridCells[obstacle6Location].classList.add("tank");
+    }
+  }, obstacleSpeed);
+}
+
+moveObstacle6Right();
 
 function startGame() {}
 

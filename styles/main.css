@@ -78,6 +78,41 @@ button {
   background-position: center;
 }
 
+.minibus {
+  background-image: url("../assets/minibus.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.bus {
+  background-image: url("../assets/bus.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.truck {
+  background-image: url("../assets/truck.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.tank {
+  background-image: url("../assets/tank.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.fly {
+  background-image: url("../assets/fly.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
 .current-game-info {
   gap: 450px;
   font-size: 24px;
