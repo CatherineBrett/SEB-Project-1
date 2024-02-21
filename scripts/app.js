@@ -17,7 +17,7 @@ let obstacle4Timer = null;
 let obstacle5Timer = null;
 let obstacle6Timer = null;
 const startButton = document.getElementById("start");
-let obstacleSpeed = 1000;
+let obstacleSpeed = 500;
 let lives = 3;
 const livesTracker = document.getElementById("lives-tracker");
 let score = 0;
@@ -69,7 +69,7 @@ function detectOb1Collision() {
     score -= 10;
     scoreBoard.textContent = score;
     lives--;
-    livesTracker.innerText = lives ? "🐸".repeat(lives) : "😭";
+    livesTracker.innerText = lives ? "💚".repeat(lives) : "😭";
   }
 }
 
@@ -80,7 +80,7 @@ function detectOb2Collision() {
     score -= 10;
     scoreBoard.textContent = score;
     lives--;
-    livesTracker.innerText = lives ? "🐸".repeat(lives) : "😭";
+    livesTracker.innerText = lives ? "💚".repeat(lives) : "😭 (R.I.P.)";
   }
 }
 
@@ -91,7 +91,7 @@ function detectOb3Collision() {
     score -= 10;
     scoreBoard.textContent = score;
     lives--;
-    livesTracker.innerText = lives ? "🐸".repeat(lives) : "😭";
+    livesTracker.innerText = lives ? "💚".repeat(lives) : "😭 (R.I.P.)";
   }
 }
 
@@ -102,7 +102,7 @@ function detectOb4Collision() {
     score -= 10;
     scoreBoard.textContent = score;
     lives--;
-    livesTracker.innerText = lives ? "🐸".repeat(lives) : "😭";
+    livesTracker.innerText = lives ? "💚".repeat(lives) : "😭 (R.I.P.)";
   }
 }
 
@@ -113,7 +113,7 @@ function detectOb5Collision() {
     score -= 10;
     scoreBoard.textContent = score;
     lives--;
-    livesTracker.innerText = lives ? "🐸".repeat(lives) : "😭";
+    livesTracker.innerText = lives ? "💚".repeat(lives) : "😭";
   }
 }
 function detectOb6Collision() {
@@ -123,7 +123,7 @@ function detectOb6Collision() {
     score -= 10;
     scoreBoard.textContent = score;
     lives--;
-    livesTracker.innerText = lives ? "🐸".repeat(lives) : "😭";
+    livesTracker.innerText = lives ? "💚".repeat(lives) : "😭";
   }
 }
 
