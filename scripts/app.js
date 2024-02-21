@@ -44,10 +44,15 @@ function addLilyPad(i) {
   lilyCell.classList.add("lily-pad");
 }
 
+function buildRoad(i) {
+  const roadCell = gridCells[i];
+  roadCell.classList.add("road");
+}
+
 function makeGrid() {
   for (let i = 0; i < numberOfCells; i++) {
     const cell = document.createElement("div");
-    cell.innerText = i;
+    // cell.innerText = i;
     gameGrid.appendChild(cell);
     gridCells.push(cell);
     if (i === 0 || i === 3 || i === 6 || i === 9) {
@@ -55,6 +60,9 @@ function makeGrid() {
     }
     if (i === 42 || i === 49 || i === 50 || i === 57) {
       addFly(i);
+    }
+    if ((i > 9 && i < 40) || (i > 59 && i < 90)) {
+      buildRoad(i);
     }
   }
   addPlayer(playerStartLocation);

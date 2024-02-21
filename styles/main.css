@@ -4,6 +4,7 @@
 }
 
 body {
+  background-color: #ffc0cb;
   height: 100vh;
   margin: 0;
 }
@@ -56,12 +57,12 @@ button {
   justify-content: center;
   height: 600px;
   width: 600px;
-  border: 1px solid grey;
-  background-color: pink;
+  /* border: 1px solid grey; */
+  background-color: rgba(98, 205, 98, 0.767);
 }
 
 .game-grid div {
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   flex-grow: 1;
   height: 10%;
   width: 10%;
@@ -124,6 +125,7 @@ button {
 }
 
 .lily-pad {
+  background-color: #00ffff;
   background-image: url("../assets/lily-pad.png");
   background-repeat: no-repeat;
   background-size: contain;
@@ -131,10 +133,15 @@ button {
 }
 
 .home {
+  background-color: #00ffff;
   background-image: url("../assets/frog-on-pad.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+}
+
+.road {
+  background-color: #808080;
 }
 
 .current-game-info {
