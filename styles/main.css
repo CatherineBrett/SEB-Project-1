@@ -130,6 +130,13 @@ button {
   background-position: center;
 }
 
+.home {
+  background-image: url("../assets/frog-on-pad.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
 .current-game-info {
   gap: 400px;
   font-size: 24px;

@@ -3,7 +3,8 @@ const width = 10;
 const height = 10;
 const numberOfCells = width * height;
 const gridCells = [];
-let playerLocation = 94;
+const playerStartLocation = 94;
+let playerLocation = playerStartLocation;
 let obstacle1Location = 89;
 let obstacle2Location = 71;
 let obstacle3Location = 67;
@@ -17,7 +18,8 @@ let obstacle4Timer = null;
 let obstacle5Timer = null;
 let obstacle6Timer = null;
 const startButton = document.getElementById("start");
-let obstacleSpeed = 500;
+let obstacleSpeed = 2000;
+let lilyCell = null;
 let lives = 3;
 const livesTracker = document.getElementById("lives-tracker");
 let score = 0;
@@ -30,7 +32,8 @@ function addPlayer(location) {
 function addFlies() {}
 
 function addLilyPad() {
-  gridCells[Math.floor(Math.random() * width)].classList.add("lily-pad");
+  lilyCell = gridCells[Math.floor(Math.random() * width)];
+  lilyCell.classList.add("lily-pad");
 }
 
 function makeGrid() {
@@ -41,7 +44,7 @@ function makeGrid() {
     gridCells.push(cell);
   }
 
-  addPlayer(playerLocation);
+  addPlayer(playerStartLocation);
   addLilyPad();
 }
 
@@ -67,6 +70,7 @@ function relocatePlayer(event) {
   }
 
   addPlayer(playerLocation);
+  frogIsHome();
 }
 
 function detectOb1Collision() {
@@ -131,6 +135,18 @@ function detectOb6Collision() {
     scoreBoard.textContent = score;
     lives--;
     livesTracker.innerText = lives ? "💚".repeat(lives) : "😭";
+  }
+}
+
+function frogIsHome() {
+  if (lilyCell.classList.contains("player")) {
+    console.log("Hooray, you made it!");
+    lilyCell.classList.remove("player", "lily-pad");
+    lilyCell.classList.add("home");
+    score += 60;
+    scoreBoard.textContent = score;
+    playerLocation = playerStartLocation;
+    addPlayer(playerLocation);
   }
 }
 
