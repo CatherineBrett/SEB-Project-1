@@ -27,6 +27,12 @@ function addPlayer(location) {
   gridCells[location].classList.add("player");
 }
 
+function addFlies() {}
+
+function addLilyPad() {
+  gridCells[Math.floor(Math.random() * width)].classList.add("lily-pad");
+}
+
 function makeGrid() {
   for (let i = 0; i < numberOfCells; i++) {
     const cell = document.createElement("div");
@@ -36,6 +42,7 @@ function makeGrid() {
   }
 
   addPlayer(playerLocation);
+  addLilyPad();
 }
 
 makeGrid();
