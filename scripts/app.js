@@ -25,7 +25,6 @@ let obstacle5Timer = null;
 let obstacle6Timer = null;
 const startButton = document.getElementById("start");
 let obstacleSpeed = 1000;
-let lilyCell = null;
 let lives = 3;
 const livesTracker = document.getElementById("lives-tracker");
 let score = 0;
@@ -35,10 +34,13 @@ function addPlayer(location) {
   gridCells[location].classList.add("player");
 }
 
-function addFlies() {}
+function addFly(i) {
+  const flyCell = gridCells[i];
+  flyCell.classList.add("fly");
+}
 
-function addLilyPad() {
-  lilyCell = gridCells[Math.floor(Math.random() * width)];
+function addLilyPad(i) {
+  const lilyCell = gridCells[i];
   lilyCell.classList.add("lily-pad");
 }
 
@@ -48,16 +50,21 @@ function makeGrid() {
     cell.innerText = i;
     gameGrid.appendChild(cell);
     gridCells.push(cell);
+    if (i === 0 || i === 3 || i === 6 || i === 9) {
+      addLilyPad(i);
+    }
+    if (i === 42 || i === 49 || i === 50 || i === 57) {
+      addFly(i);
+    }
   }
-
   addPlayer(playerStartLocation);
-  addLilyPad();
 }
 
 makeGrid();
 
 function removePlayer(location) {
-  gridCells[location].classList.remove("player");
+  const player = gridCells[location];
+  player.classList.remove("player");
 }
 
 // 37 is left, 38 is up, 39 is right, 40 is down
@@ -145,10 +152,11 @@ function detectOb6Collision() {
 }
 
 function frogIsHome() {
-  if (lilyCell.classList.contains("player")) {
+  const possibleHome = gridCells[playerLocation];
+  if (possibleHome.classList.contains("lily-pad")) {
     console.log("Hooray, you made it!");
-    lilyCell.classList.remove("player", "lily-pad");
-    lilyCell.classList.add("home");
+    possibleHome.classList.remove("player", "lily-pad");
+    possibleHome.classList.add("home");
     score += 60;
     scoreBoard.textContent = score;
     playerLocation = playerStartLocation;
@@ -166,7 +174,7 @@ function moveObstacle1Left() {
     } else {
       gridCells[obsOneLocation].classList.remove("purple-car");
       obsOneLocation--;
-      // I don't understand why the line below needs to be there, but the obstacle doesn't appear without it.
+      // This is causing a bug I need to fix
       gridCells[obsOneLocation].classList.add("purple-car");
     }
   }, obstacleSpeed);
