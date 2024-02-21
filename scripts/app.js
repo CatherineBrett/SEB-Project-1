@@ -5,12 +5,18 @@ const numberOfCells = width * height;
 const gridCells = [];
 const playerStartLocation = 94;
 let playerLocation = playerStartLocation;
-let obstacle1Location = 89;
-let obstacle2Location = 71;
-let obstacle3Location = 67;
-let obstacle4Location = 33;
-let obstacle5Location = 25;
-let obstacle6Location = 15;
+const obsOneStart = 89;
+let obsOneLocation = obsOneStart;
+const obsTwoStart = 70;
+let obsTwoLocation = obsTwoStart;
+const obsThreeStart = 69;
+let obsThreeLocation = obsThreeStart;
+const obsFourStart = 30;
+let obsFourLocation = obsFourStart;
+const obsFiveStart = 29;
+let obsFiveLocation = obsFiveStart;
+const obsSixStart = 10;
+let obsSixLocation = obsSixStart;
 let obstacle1Timer = null;
 let obstacle2Timer = null;
 let obstacle3Timer = null;
@@ -18,7 +24,7 @@ let obstacle4Timer = null;
 let obstacle5Timer = null;
 let obstacle6Timer = null;
 const startButton = document.getElementById("start");
-let obstacleSpeed = 2000;
+let obstacleSpeed = 1000;
 let lilyCell = null;
 let lives = 3;
 const livesTracker = document.getElementById("lives-tracker");
@@ -74,7 +80,7 @@ function relocatePlayer(event) {
 }
 
 function detectOb1Collision() {
-  if (gridCells[obstacle1Location].classList.contains("player")) {
+  if (gridCells[obsOneLocation].classList.contains("player")) {
     console.log("Oh no, you've hit obstacle 1!");
     clearInterval(obstacle1Timer);
     score -= 10;
@@ -85,7 +91,7 @@ function detectOb1Collision() {
 }
 
 function detectOb2Collision() {
-  if (gridCells[obstacle2Location].classList.contains("player")) {
+  if (gridCells[obsTwoLocation].classList.contains("player")) {
     console.log("Oh no, you've hit obstacle 2!");
     clearInterval(obstacle2Timer);
     score -= 10;
@@ -96,7 +102,7 @@ function detectOb2Collision() {
 }
 
 function detectOb3Collision() {
-  if (gridCells[obstacle3Location].classList.contains("player")) {
+  if (gridCells[obsThreeLocation].classList.contains("player")) {
     console.log("Oh no, you've hit obstacle 3!");
     clearInterval(obstacle3Timer);
     score -= 10;
@@ -107,7 +113,7 @@ function detectOb3Collision() {
 }
 
 function detectOb4Collision() {
-  if (gridCells[obstacle4Location].classList.contains("player")) {
+  if (gridCells[obsFourLocation].classList.contains("player")) {
     console.log("Oh no, you've hit obstacle 4!");
     clearInterval(obstacle4Timer);
     score -= 10;
@@ -118,7 +124,7 @@ function detectOb4Collision() {
 }
 
 function detectOb5Collision() {
-  if (gridCells[obstacle5Location].classList.contains("player")) {
+  if (gridCells[obsFiveLocation].classList.contains("player")) {
     console.log("Oh no, you've hit obstacle 5!");
     clearInterval(obstacle5Timer);
     score -= 10;
@@ -128,7 +134,7 @@ function detectOb5Collision() {
   }
 }
 function detectOb6Collision() {
-  if (gridCells[obstacle6Location].classList.contains("player")) {
+  if (gridCells[obsSixLocation].classList.contains("player")) {
     console.log("Oh no, you've hit obstacle 6!");
     clearInterval(obstacle6Timer);
     score -= 10;
@@ -152,14 +158,16 @@ function frogIsHome() {
 
 function moveObstacle1Left() {
   obstacle1Timer = setInterval(() => {
-    gridCells[obstacle1Location].classList.add("purple-car");
+    gridCells[obsOneLocation].classList.add("purple-car");
     detectOb1Collision();
-    if (obstacle1Location === 80) {
-      clearInterval(obstacle1Timer);
+    if (obsOneLocation % width === 0) {
+      gridCells[obsOneLocation].classList.remove("purple-car");
+      obsOneLocation = obsOneStart;
     } else {
-      gridCells[obstacle1Location].classList.remove("purple-car");
-      obstacle1Location--;
-      gridCells[obstacle1Location].classList.add("purple-car");
+      gridCells[obsOneLocation].classList.remove("purple-car");
+      obsOneLocation--;
+      // I don't understand why the line below needs to be there, but the obstacle doesn't appear without it.
+      gridCells[obsOneLocation].classList.add("purple-car");
     }
   }, obstacleSpeed);
 }
@@ -168,14 +176,15 @@ moveObstacle1Left();
 
 function moveObstacle2Right() {
   obstacle2Timer = setInterval(() => {
-    gridCells[obstacle2Location].classList.add("green-car");
+    gridCells[obsTwoLocation].classList.add("green-car");
     detectOb2Collision();
-    if (obstacle2Location === 79) {
-      clearInterval(obstacle2Timer);
+    if (obsTwoLocation % width === width - 1) {
+      gridCells[obsTwoLocation].classList.remove("green-car");
+      obsTwoLocation = obsTwoStart;
     } else {
-      gridCells[obstacle2Location].classList.remove("green-car");
-      obstacle2Location++;
-      gridCells[obstacle2Location].classList.add("green-car");
+      gridCells[obsTwoLocation].classList.remove("green-car");
+      obsTwoLocation++;
+      gridCells[obsTwoLocation].classList.add("green-car");
     }
   }, obstacleSpeed);
 }
@@ -184,14 +193,15 @@ moveObstacle2Right();
 
 function moveObstacle3Left() {
   obstacle3Timer = setInterval(() => {
-    gridCells[obstacle3Location].classList.add("minibus");
+    gridCells[obsThreeLocation].classList.add("minibus");
     detectOb3Collision();
-    if (obstacle3Location === 60) {
-      clearInterval(obstacle3Timer);
+    if (obsThreeLocation % width === 0) {
+      gridCells[obsThreeLocation].classList.remove("minibus");
+      obsThreeLocation = obsThreeStart;
     } else {
-      gridCells[obstacle3Location].classList.remove("minibus");
-      obstacle3Location--;
-      gridCells[obstacle3Location].classList.add("minibus");
+      gridCells[obsThreeLocation].classList.remove("minibus");
+      obsThreeLocation--;
+      gridCells[obsThreeLocation].classList.add("minibus");
     }
   }, obstacleSpeed);
 }
@@ -200,14 +210,15 @@ moveObstacle3Left();
 
 function moveObstacle4Right() {
   obstacle4Timer = setInterval(() => {
-    gridCells[obstacle4Location].classList.add("bus");
+    gridCells[obsFourLocation].classList.add("bus");
     detectOb4Collision();
-    if (obstacle4Location === 39) {
-      clearInterval(obstacle4Timer);
+    if (obsFourLocation % width === width - 1) {
+      gridCells[obsFourLocation].classList.remove("bus");
+      obsFourLocation = obsFourStart;
     } else {
-      gridCells[obstacle4Location].classList.remove("bus");
-      obstacle4Location++;
-      gridCells[obstacle4Location].classList.add("bus");
+      gridCells[obsFourLocation].classList.remove("bus");
+      obsFourLocation++;
+      gridCells[obsFourLocation].classList.add("bus");
     }
   }, obstacleSpeed);
 }
@@ -216,14 +227,15 @@ moveObstacle4Right();
 
 function moveObstacle5Left() {
   obstacle5Timer = setInterval(() => {
-    gridCells[obstacle5Location].classList.add("truck");
+    gridCells[obsFiveLocation].classList.add("truck");
     detectOb5Collision();
-    if (obstacle5Location === 20) {
-      clearInterval(obstacle5Timer);
+    if (obsFiveLocation % width === 0) {
+      gridCells[obsFiveLocation].classList.remove("truck");
+      obsFiveLocation = obsFiveStart;
     } else {
-      gridCells[obstacle5Location].classList.remove("truck");
-      obstacle5Location--;
-      gridCells[obstacle5Location].classList.add("truck");
+      gridCells[obsFiveLocation].classList.remove("truck");
+      obsFiveLocation--;
+      gridCells[obsFiveLocation].classList.add("truck");
     }
   }, obstacleSpeed);
 }
@@ -232,14 +244,15 @@ moveObstacle5Left();
 
 function moveObstacle6Right() {
   obstacle6Timer = setInterval(() => {
-    gridCells[obstacle6Location].classList.add("tank");
+    gridCells[obsSixLocation].classList.add("tank");
     detectOb6Collision();
-    if (obstacle6Location === 19) {
-      clearInterval(obstacle6Timer);
+    if (obsSixLocation % width === width - 1) {
+      gridCells[obsSixLocation].classList.remove("tank");
+      obsSixLocation = obsSixStart;
     } else {
-      gridCells[obstacle6Location].classList.remove("tank");
-      obstacle6Location++;
-      gridCells[obstacle6Location].classList.add("tank");
+      gridCells[obsSixLocation].classList.remove("tank");
+      obsSixLocation++;
+      gridCells[obsSixLocation].classList.add("tank");
     }
   }, obstacleSpeed);
 }
