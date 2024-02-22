@@ -60,7 +60,7 @@ function buildBank(i) {
 function makeGrid() {
   for (let i = 0; i < numberOfCells; i++) {
     const cell = document.createElement("div");
-    cell.innerText = i;
+    // cell.innerText = i;
     gameGrid.appendChild(cell);
     gridCells.push(cell);
     if (i === 0 || i === 3 || i === 6 || i === 9) {
@@ -241,13 +241,14 @@ function frogIsHome() {
     scoreBoard.textContent = score;
     playerLocation = playerStartLocation;
     addPlayer(playerLocation);
+    levelUp();
   }
 }
 
 function catchFly() {
   const possibleFly = gridCells[playerLocation];
   if (possibleFly.classList.contains("fly")) {
-    possibleFly.classList.remove("fly");
+    possibleFly.classList.replace("fly", "was-fly");
     playFlySound();
     score += 40;
     scoreBoard.textContent = score;
@@ -356,7 +357,19 @@ function startGame() {
   }
 }
 
-function goFaster() {}
+function resetLilyPadsAndFlies() {
+  gridCells.forEach((cell) => cell.classList.replace("home", "lily-pad"));
+  gridCells.forEach((cell) => cell.classList.replace("was-fly", "fly"));
+}
+
+function levelUp() {
+  const frogsHome = document.querySelectorAll(".home").length;
+  if (frogsHome === 4) {
+    score += 200;
+    obstacleSpeed = obstacleSpeed * 0.75;
+    setTimeout(resetLilyPadsAndFlies, 500);
+  }
+}
 
 function gameOver() {
   clearInterval(obstacle1Timer);
@@ -401,7 +414,6 @@ function reset() {
   gridCells = [];
   gameGrid.innerHTML = "";
   makeGrid();
-  console.log(gridCells.length);
 }
 
 startButton.addEventListener("click", startGame);
