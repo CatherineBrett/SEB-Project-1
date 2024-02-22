@@ -2,7 +2,7 @@ const gameGrid = document.querySelector(".game-grid");
 const width = 10;
 const height = 10;
 const numberOfCells = width * height;
-const gridCells = [];
+let gridCells = [];
 const playerStartLocation = 94;
 let playerLocation = playerStartLocation;
 const obsOneStart = 89;
@@ -356,6 +356,8 @@ function startGame() {
   }
 }
 
+function goFaster() {}
+
 function gameOver() {
   clearInterval(obstacle1Timer);
   clearInterval(obstacle2Timer);
@@ -396,18 +398,10 @@ function reset() {
   lives = 3;
   livesTracker.innerHTML = "💚".repeat(lives);
   gameIsRunning = false;
-  gridCells.forEach((cell) =>
-    cell.classList.remove(
-      "purple-car",
-      "green-car",
-      "minibus",
-      "bus",
-      "truck",
-      "tank",
-      "home"
-    )
-  );
+  gridCells = [];
+  gameGrid.innerHTML = "";
   makeGrid();
+  console.log(gridCells.length);
 }
 
 startButton.addEventListener("click", startGame);

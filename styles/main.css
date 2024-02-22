@@ -30,7 +30,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 200px;
+  gap: 100px;
 }
 
 button {
