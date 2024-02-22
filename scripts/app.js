@@ -24,11 +24,13 @@ let obstacle4Timer = null;
 let obstacle5Timer = null;
 let obstacle6Timer = null;
 const startButton = document.getElementById("start");
+const resetButton = document.getElementById("reset");
 let obstacleSpeed = 1000;
 let lives = 3;
 const livesTracker = document.getElementById("lives-tracker");
 let score = 0;
 const scoreBoard = document.getElementById("scoreboard");
+let gameIsRunning = false;
 const audio = document.getElementById("audio");
 
 function addPlayer(location) {
@@ -138,6 +140,9 @@ function detectOb1Collision() {
     scoreBoard.textContent = score;
     lives--;
     livesTracker.innerText = lives ? "💚".repeat(lives) : "You lose! 😢";
+    if (!lives) {
+      gameOver();
+    }
   }
 }
 
@@ -151,6 +156,9 @@ function detectOb2Collision() {
     scoreBoard.textContent = score;
     lives--;
     livesTracker.innerText = lives ? "💚".repeat(lives) : "You lose! 😢";
+    if (!lives) {
+      gameOver();
+    }
   }
 }
 
@@ -164,6 +172,9 @@ function detectOb3Collision() {
     scoreBoard.textContent = score;
     lives--;
     livesTracker.innerText = lives ? "💚".repeat(lives) : "You lose! 😢";
+    if (!lives) {
+      gameOver();
+    }
   }
 }
 
@@ -177,6 +188,9 @@ function detectOb4Collision() {
     scoreBoard.textContent = score;
     lives--;
     livesTracker.innerText = lives ? "💚".repeat(lives) : "You lose! 😢";
+    if (!lives) {
+      gameOver();
+    }
   }
 }
 
@@ -190,8 +204,12 @@ function detectOb5Collision() {
     scoreBoard.textContent = score;
     lives--;
     livesTracker.innerText = lives ? "💚".repeat(lives) : "You lose! 😢";
+    if (!lives) {
+      gameOver();
+    }
   }
 }
+
 function detectOb6Collision() {
   if (gridCells[obsSixLocation].classList.contains("player")) {
     gridCells[obsSixLocation].classList.remove("player");
@@ -202,6 +220,9 @@ function detectOb6Collision() {
     scoreBoard.textContent = score;
     lives--;
     livesTracker.innerText = lives ? "💚".repeat(lives) : "You lose! 😢";
+    if (!lives) {
+      gameOver();
+    }
   }
 }
 
@@ -238,13 +259,10 @@ function moveObstacle1Left() {
     } else {
       gridCells[obsOneLocation].classList.remove("purple-car");
       obsOneLocation--;
-      // This is causing a bug I need to fix
       gridCells[obsOneLocation].classList.add("purple-car");
     }
   }, obstacleSpeed);
 }
-
-moveObstacle1Left();
 
 function moveObstacle2Right() {
   obstacle2Timer = setInterval(() => {
@@ -261,8 +279,6 @@ function moveObstacle2Right() {
   }, obstacleSpeed);
 }
 
-moveObstacle2Right();
-
 function moveObstacle3Left() {
   obstacle3Timer = setInterval(() => {
     gridCells[obsThreeLocation].classList.add("minibus");
@@ -277,8 +293,6 @@ function moveObstacle3Left() {
     }
   }, obstacleSpeed);
 }
-
-moveObstacle3Left();
 
 function moveObstacle4Right() {
   obstacle4Timer = setInterval(() => {
@@ -295,8 +309,6 @@ function moveObstacle4Right() {
   }, obstacleSpeed);
 }
 
-moveObstacle4Right();
-
 function moveObstacle5Left() {
   obstacle5Timer = setInterval(() => {
     gridCells[obsFiveLocation].classList.add("truck");
@@ -311,8 +323,6 @@ function moveObstacle5Left() {
     }
   }, obstacleSpeed);
 }
-
-moveObstacle5Left();
 
 function moveObstacle6Right() {
   obstacle6Timer = setInterval(() => {
@@ -329,9 +339,64 @@ function moveObstacle6Right() {
   }, obstacleSpeed);
 }
 
-moveObstacle6Right();
+function startGame() {
+  if (gameIsRunning === false) {
+    gameIsRunning = true;
+    moveObstacle1Left();
+    moveObstacle2Right();
+    moveObstacle3Left();
+    moveObstacle4Right();
+    moveObstacle5Left();
+    moveObstacle6Right();
+  }
+}
 
-function startGame() {}
+function gameOver() {
+  clearInterval(obstacle1Timer);
+  clearInterval(obstacle2Timer);
+  clearInterval(obstacle3Timer);
+  clearInterval(obstacle4Timer);
+  clearInterval(obstacle5Timer);
+  clearInterval(obstacle6Timer);
+  const highScore = localStorage.getItem("high-score");
+  if (!highScore || score > highScore) {
+    localStorage.setItem("high-score", score);
+  }
+  setTimeout(() => {
+    if (highScore > score) {
+      alert(
+        `Game over! You scored ${score}. The high score is currently ${highScore}. Must try harder!`
+      );
+    } else if (parseInt(highScore) === score) {
+      alert(
+        `Game over! You reached a high score of ${score} AGAIN! Yawn. Must try harder!`
+      );
+    } else {
+      alert(
+        `Game over! Commiserations. However, you did achieve a new high score of ${score}! Pat on the back for that, at least.`
+      );
+    }
+  }, 100);
+}
+
+function reset() {
+  score = 0;
+  scoreBoard.textContent = score;
+  lives = 3;
+  livesTracker.innerHTML = "💚".repeat(lives);
+  gameIsRunning = false;
+  gridCells.forEach((cell) =>
+    cell.classList.remove(
+      "purple-car",
+      "green-car",
+      "minibus",
+      "bus",
+      "truck",
+      "tank"
+    )
+  );
+}
 
 startButton.addEventListener("click", startGame);
 document.addEventListener("keydown", relocatePlayer);
+resetButton.addEventListener("click", reset);
