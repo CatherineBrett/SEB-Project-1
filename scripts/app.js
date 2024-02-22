@@ -25,7 +25,7 @@ let obstacle5Timer = null;
 let obstacle6Timer = null;
 const startButton = document.getElementById("start");
 const resetButton = document.getElementById("reset");
-let obstacleSpeed = 1000;
+let obstacleSpeed = 500;
 let lives = 3;
 const livesTracker = document.getElementById("lives-tracker");
 let score = 0;
@@ -261,7 +261,7 @@ function moveObstacle1Left() {
       obsOneLocation--;
       gridCells[obsOneLocation].classList.add("purple-car");
     }
-  }, obstacleSpeed);
+  }, obstacleSpeed * 2);
 }
 
 function moveObstacle2Right() {
@@ -306,7 +306,7 @@ function moveObstacle4Right() {
       obsFourLocation++;
       gridCells[obsFourLocation].classList.add("bus");
     }
-  }, obstacleSpeed);
+  }, obstacleSpeed * 0.8);
 }
 
 function moveObstacle5Left() {
@@ -321,7 +321,7 @@ function moveObstacle5Left() {
       obsFiveLocation--;
       gridCells[obsFiveLocation].classList.add("truck");
     }
-  }, obstacleSpeed);
+  }, obstacleSpeed * 1.2);
 }
 
 function moveObstacle6Right() {
@@ -343,10 +343,10 @@ function startGame() {
   if (gameIsRunning === false) {
     gameIsRunning = true;
     moveObstacle1Left();
-    moveObstacle2Right();
-    moveObstacle3Left();
-    moveObstacle4Right();
-    moveObstacle5Left();
+    setTimeout(moveObstacle2Right, 2000);
+    setTimeout(moveObstacle3Left, 1000);
+    setTimeout(moveObstacle4Right, 1000);
+    setTimeout(moveObstacle5Left, 2000);
     moveObstacle6Right();
   }
 }
