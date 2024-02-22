@@ -380,6 +380,12 @@ function gameOver() {
 }
 
 function reset() {
+  clearInterval(obstacle1Timer);
+  clearInterval(obstacle2Timer);
+  clearInterval(obstacle3Timer);
+  clearInterval(obstacle4Timer);
+  clearInterval(obstacle5Timer);
+  clearInterval(obstacle6Timer);
   score = 0;
   scoreBoard.textContent = score;
   lives = 3;
@@ -392,9 +398,11 @@ function reset() {
       "minibus",
       "bus",
       "truck",
-      "tank"
+      "tank",
+      "home"
     )
   );
+  makeGrid();
 }
 
 startButton.addEventListener("click", startGame);
