@@ -60,7 +60,7 @@ function buildBank(i) {
 function makeGrid() {
   for (let i = 0; i < numberOfCells; i++) {
     const cell = document.createElement("div");
-    // cell.innerText = i;
+    cell.innerText = i;
     gameGrid.appendChild(cell);
     gridCells.push(cell);
     if (i === 0 || i === 3 || i === 6 || i === 9) {
@@ -112,7 +112,12 @@ function relocatePlayer(event) {
   if (event.keyCode === 37 && playerLocation % width !== 0) {
     playerLocation -= 1;
     playBoing();
-  } else if (event.keyCode === 38 && playerLocation >= height) {
+  } else if (
+    event.keyCode === 38 &&
+    playerLocation >= height &&
+    !gridCells[playerLocation - 10].classList.contains("bank") &&
+    !gridCells[playerLocation - 10].classList.contains("home")
+  ) {
     playerLocation -= height;
     playBoing();
     score += 10;
