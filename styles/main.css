@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: rgb(69, 67, 67);
 }
 
 body {
@@ -11,9 +12,7 @@ body {
 
 h1 {
   font-size: 40px;
-  font-style: italic;
-  color: rgb(0, 180, 0);
-  font-weight: 900;
+  font-weight: 750;
   margin: 20px 0 10px;
 }
 
@@ -125,7 +124,7 @@ button {
 }
 
 .lily-pad {
-  background-color: #00ffff;
+  background-color: #45ada8;
   background-image: url("../assets/lily-pad.png");
   background-repeat: no-repeat;
   background-size: contain;
@@ -133,11 +132,15 @@ button {
 }
 
 .home {
-  background-color: #00ffff;
+  background-color: #45ada8;
   background-image: url("../assets/frog-on-pad.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+}
+
+.bank {
+  background-color: #765338;
 }
 
 .road {
@@ -146,6 +149,6 @@ button {
 
 .current-game-info {
   gap: 400px;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
 }

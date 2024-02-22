@@ -29,6 +29,7 @@ let lives = 3;
 const livesTracker = document.getElementById("lives-tracker");
 let score = 0;
 const scoreBoard = document.getElementById("scoreboard");
+const audio = document.getElementById("audio");
 
 function addPlayer(location) {
   gridCells[location].classList.add("player");
@@ -49,6 +50,11 @@ function buildRoad(i) {
   roadCell.classList.add("road");
 }
 
+function buildBank(i) {
+  const bankCell = gridCells[i];
+  bankCell.classList.add("bank");
+}
+
 function makeGrid() {
   for (let i = 0; i < numberOfCells; i++) {
     const cell = document.createElement("div");
@@ -58,7 +64,10 @@ function makeGrid() {
     if (i === 0 || i === 3 || i === 6 || i === 9) {
       addLilyPad(i);
     }
-    if (i === 42 || i === 49 || i === 50 || i === 57) {
+    if (i > 0 && i < 9 && i !== 3 && i !== 6) {
+      buildBank(i);
+    }
+    if (i === 42 || i === 45 || i === 48 || i === 51 || i === 54 || i === 57) {
       addFly(i);
     }
     if ((i > 9 && i < 40) || (i > 59 && i < 90)) {
@@ -75,100 +84,147 @@ function removePlayer(location) {
   player.classList.remove("player");
 }
 
+function playBoing() {
+  audio.src = "../sounds/boing.mp3";
+  audio.play();
+}
+
+function playCollisionSound() {
+  audio.src = "../sounds/collision.mp3";
+  audio.play();
+}
+
+function playFlySound() {
+  audio.src = "../sounds/fly-bonus.mp3";
+  audio.play();
+}
+
+function playHomeSound() {
+  audio.src = "../sounds/lily-pad.mp3";
+  audio.play();
+}
+
 // 37 is left, 38 is up, 39 is right, 40 is down
 function relocatePlayer(event) {
   removePlayer(playerLocation);
   if (event.keyCode === 37 && playerLocation % width !== 0) {
     playerLocation -= 1;
+    playBoing();
   } else if (event.keyCode === 38 && playerLocation >= height) {
     playerLocation -= height;
+    playBoing();
     score += 10;
     scoreBoard.textContent = score;
   } else if (event.keyCode === 39 && playerLocation % width !== width - 1) {
     playerLocation += 1;
+    playBoing();
   } else if (event.keyCode === 40 && playerLocation < 90) {
     playerLocation += height;
+    playBoing();
   }
 
   addPlayer(playerLocation);
+  catchFly();
   frogIsHome();
 }
 
 function detectOb1Collision() {
   if (gridCells[obsOneLocation].classList.contains("player")) {
-    console.log("Oh no, you've hit obstacle 1!");
-    clearInterval(obstacle1Timer);
+    gridCells[obsOneLocation].classList.remove("player");
+    playCollisionSound();
+    playerLocation = playerStartLocation;
+    addPlayer(playerLocation);
     score -= 10;
     scoreBoard.textContent = score;
     lives--;
-    livesTracker.innerText = lives ? "💚".repeat(lives) : "😭";
+    livesTracker.innerText = lives ? "💚".repeat(lives) : "You lose! 😢";
   }
 }
 
 function detectOb2Collision() {
   if (gridCells[obsTwoLocation].classList.contains("player")) {
-    console.log("Oh no, you've hit obstacle 2!");
-    clearInterval(obstacle2Timer);
+    gridCells[obsTwoLocation].classList.remove("player");
+    playCollisionSound();
+    playerLocation = playerStartLocation;
+    addPlayer(playerLocation);
     score -= 10;
     scoreBoard.textContent = score;
     lives--;
-    livesTracker.innerText = lives ? "💚".repeat(lives) : "😭 (R.I.P.)";
+    livesTracker.innerText = lives ? "💚".repeat(lives) : "You lose! 😢";
   }
 }
 
 function detectOb3Collision() {
   if (gridCells[obsThreeLocation].classList.contains("player")) {
-    console.log("Oh no, you've hit obstacle 3!");
-    clearInterval(obstacle3Timer);
+    gridCells[obsThreeLocation].classList.remove("player");
+    playCollisionSound();
+    playerLocation = playerStartLocation;
+    addPlayer(playerLocation);
     score -= 10;
     scoreBoard.textContent = score;
     lives--;
-    livesTracker.innerText = lives ? "💚".repeat(lives) : "😭 (R.I.P.)";
+    livesTracker.innerText = lives ? "💚".repeat(lives) : "You lose! 😢";
   }
 }
 
 function detectOb4Collision() {
   if (gridCells[obsFourLocation].classList.contains("player")) {
-    console.log("Oh no, you've hit obstacle 4!");
-    clearInterval(obstacle4Timer);
+    gridCells[obsFourLocation].classList.remove("player");
+    playCollisionSound();
+    playerLocation = playerStartLocation;
+    addPlayer(playerLocation);
     score -= 10;
     scoreBoard.textContent = score;
     lives--;
-    livesTracker.innerText = lives ? "💚".repeat(lives) : "😭 (R.I.P.)";
+    livesTracker.innerText = lives ? "💚".repeat(lives) : "You lose! 😢";
   }
 }
 
 function detectOb5Collision() {
   if (gridCells[obsFiveLocation].classList.contains("player")) {
-    console.log("Oh no, you've hit obstacle 5!");
-    clearInterval(obstacle5Timer);
+    gridCells[obsFiveLocation].classList.remove("player");
+    playCollisionSound();
+    playerLocation = playerStartLocation;
+    addPlayer(playerLocation);
     score -= 10;
     scoreBoard.textContent = score;
     lives--;
-    livesTracker.innerText = lives ? "💚".repeat(lives) : "😭";
+    livesTracker.innerText = lives ? "💚".repeat(lives) : "You lose! 😢";
   }
 }
 function detectOb6Collision() {
   if (gridCells[obsSixLocation].classList.contains("player")) {
-    console.log("Oh no, you've hit obstacle 6!");
-    clearInterval(obstacle6Timer);
+    gridCells[obsSixLocation].classList.remove("player");
+    playCollisionSound();
+    playerLocation = playerStartLocation;
+    addPlayer(playerLocation);
     score -= 10;
     scoreBoard.textContent = score;
     lives--;
-    livesTracker.innerText = lives ? "💚".repeat(lives) : "😭";
+    livesTracker.innerText = lives ? "💚".repeat(lives) : "You lose! 😢";
   }
 }
 
 function frogIsHome() {
   const possibleHome = gridCells[playerLocation];
   if (possibleHome.classList.contains("lily-pad")) {
-    console.log("Hooray, you made it!");
     possibleHome.classList.remove("player", "lily-pad");
     possibleHome.classList.add("home");
-    score += 60;
+    playHomeSound();
+    score += 90;
     scoreBoard.textContent = score;
     playerLocation = playerStartLocation;
     addPlayer(playerLocation);
+  }
+}
+
+function catchFly() {
+  const possibleFly = gridCells[playerLocation];
+  if (possibleFly.classList.contains("fly")) {
+    possibleFly.classList.remove("fly");
+    playFlySound();
+    score += 40;
+    scoreBoard.textContent = score;
   }
 }
 
