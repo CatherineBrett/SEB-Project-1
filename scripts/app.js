@@ -87,22 +87,22 @@ function removePlayer(location) {
 }
 
 function playBoing() {
-  audio.src = "/sounds/boing.mp3";
+  audio.src = "../assets/boing.mp3";
   audio.play();
 }
 
 function playCollisionSound() {
-  audio.src = "../sounds/collision.mp3";
+  audio.src = "../assets/collision.mp3";
   audio.play();
 }
 
 function playFlySound() {
-  audio.src = "../sounds/fly-bonus.mp3";
+  audio.src = "../assets/fly-bonus.mp3";
   audio.play();
 }
 
 function playHomeSound() {
-  audio.src = "../sounds/lily-pad.mp3";
+  audio.src = "../assets/lily-pad.mp3";
   audio.play();
 }
 
