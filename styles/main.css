@@ -1,3 +1,6 @@
+/* There is repetition in this code that I ran out of time to address during 
+the project week. I will do some refactoring in a v2!  */
+
 * {
   box-sizing: border-box;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;

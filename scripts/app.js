@@ -1,3 +1,8 @@
+// This code would also benefit from some refactoring which I didn't have time to do during
+// the project week, as I prioritised getting the game working and playable. I will be able
+// to address this in a v2. Specifically there is more hard coding than I would like, and it
+// isn't as DRY as I'd like, either!
+
 const gameGrid = document.querySelector(".game-grid");
 const width = 10;
 const height = 10;
@@ -169,8 +174,8 @@ function detectOb2Collision() {
 
 function detectOb3Collision() {
   if (gridCells[obsThreeLocation].classList.contains("player")) {
-    gridCells[obsThreeLocation].classList.remove("player");
     playCollisionSound();
+    gridCells[obsThreeLocation].classList.remove("player");
     playerLocation = playerStartLocation;
     addPlayer(playerLocation);
     score -= 10;
@@ -385,15 +390,15 @@ function gameOver() {
   setTimeout(() => {
     if (highScore > score) {
       alert(
-        `Game over! You scored ${score}. The high score is currently ${highScore}. Must try harder!`
+        `Game over! You scored ${score}. The high score is currently ${highScore}. Better luck next time!`
       );
     } else if (parseInt(highScore) === score) {
       alert(
-        `Game over! You reached a high score of ${score} AGAIN! Yawn. Must try harder!`
+        `Game over! You matched the current high score of ${highScore}. See if you can beat it next time!`
       );
     } else {
       alert(
-        `Game over! Commiserations. However, you did achieve a new high score of ${score}! Pat on the back for that, at least.`
+        `Game over! You achieved a new high score of ${score} and your frogs are JUMPING for joy!`
       );
     }
   }, 100);
