@@ -1,7 +1,7 @@
-// This code would also benefit from some refactoring which I didn't have time to do during
-// the project week, as I prioritised getting the game working and playable. I will be able
-// to address this in a v2. Specifically there is more hard coding than I would like, and it
-// isn't as DRY as I'd like, either!
+// This code would also benefit from some refactoring which I didn't have time to do during the
+// project week, as I prioritised getting the game working and playable. I will be able to address
+// this in a v2. Specifically, there is more hard coding than I would like, some of it would
+// probably make more sense in a different order, and it isn't as DRY as I'd like, either!
 
 const gameGrid = document.querySelector(".game-grid");
 const width = 10;
