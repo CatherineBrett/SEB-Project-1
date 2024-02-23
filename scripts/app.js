@@ -87,7 +87,7 @@ function removePlayer(location) {
 }
 
 function playBoing() {
-  audio.src = "../sounds/boing.mp3";
+  audio.src = "/sounds/boing.mp3";
   audio.play();
 }
 
