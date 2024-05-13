@@ -45,7 +45,7 @@ I also made notes of what my version could include, split into two columns – M
 
 ![My planning notes](/readme-assets/notes.jpg) 
 
-##Build/Code Process
+## Build/Code Process
 
 At the beginning of each day/session, I would decide what my main substantial goal should be, and then focus on achieving that as a priority. This helped me to stay on track, and to avoid getting too distracted by (or nervous about!) everything else on the list!
 
